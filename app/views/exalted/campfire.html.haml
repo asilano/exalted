@@ -1,0 +1,11 @@
+%section
+  %h1 Current Exalt
+  - if @exalt
+    = render :partial => 'exalt_summary', :object => :exalt
+  - else 
+    You don't currently have an Exalt. #{link_to 'Create', new_exalt_path} one to go adventuring!
+
+- if !@old_exalts.empty?
+  %section
+    %h1 Old Exalts
+    = render :partial => 'old_exalt_summary', :collection => @old_exalts  

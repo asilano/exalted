@@ -1,0 +1,3 @@
+module ExaltedHelper
+
+end

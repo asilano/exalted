@@ -1,0 +1,5 @@
+= form_for @encounter, :url => '' do |f|
+  #resFields
+    - @encounter.resolutions.each do |res|
+      = f.fields_for "resolutions[]", res do |r|
+        .collapse_group{:"data-name" => "Resolution fields"}= render :partial => 'resolution_form', :locals => {:f => r}

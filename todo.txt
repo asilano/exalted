@@ -1,0 +1,55 @@
+Contribution work:
+Javascriptify forms
+Tabbed nav for examples
+----
+Overall site:
+* Style
+
+Account management:
+* Test all aspects
+* Modify devise views as required
+* Style
+
+Exalt model:
+* Chargen
+* XP spend
+
+Adventure model:
+* Relationships
+* Forward-affecting
+
+Encounter model:
+* Relationships
+* Resolution mechanics
+
+----
+Future
+
+Aspects of Character Sheet:
+* Essence
+* Willpower
+** Spend
+* Virtues
+** Channel
+** Acting against
+* Specialties
+* Backgrounds
+* Charms & Spells
+** Excellencies
+** Other
+** Combos
+* Intimacies
+
+Resolution Mechanics:
+* Extended test
+* Combat
+* Social Combat
+* Spend WP for succ
+* Channel WP through Virtue
+* Use Excellency
+* Use other charm
+
+Concepts:
+* Items
+* Circle
+* Calendar (flavour except Calibration?)

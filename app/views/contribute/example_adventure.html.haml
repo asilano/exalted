@@ -1,0 +1,88 @@
+%article.bodyText
+  %h1 Examples
+  %section
+    %h1 Adventure
+    %p= link_to 'Example Encounter', example_encounter_path
+    
+    %p Below is a sample Adventure presented as you would submit it in the #{link_to 'adventure contribution form', contribute_path}.
+    
+    - adv = YAML.load(Rails.root.join('content', 'adventures', 'the_haunted_village.yml'))
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Author:
+        .yamlCont= adv.author
+        
+        %p.yamlHeader Author Link:
+        .yamlCont= url_for(adv.author_link)
+    
+      %aside.span6.columns
+        .inner
+          :markdown
+            Let the world know that You Made This.
+            
+            Please fill in the name you'd like to license your Adventure under, together with a representative URI for you, if you so desire.
+            
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Title:
+        .yamlCont= adv.title
+        
+        %p.yamlHeader Summary:
+        .yamlCont= adv.summary
+        
+      %aside.span6.columns
+        .inner
+          :markdown
+            The Adventure's **Title** and **Summary** will be displayed when a player is choosing an Adventure for their Exalt to embark on. They should be short, pithy and inviting.
+            
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader XP Level:
+        .yamlCont= adv.xp_bracket.to_s.titleize
+      
+      %aside.span6.columns
+        .inner
+          :markdown
+            **XP Level** describes the rough level of character which can be offered this **Adventure**. I'm deliberately leaving the definition of "low level", "high level" etc. vague, as I haven't finalised XP awards. Also, note that I may reassign a given Adventure to a different level if needed for balance or variety.
+            
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Encounters:
+        .yamlCont
+          %ul
+            - adv.encounters.each do |enc_name|
+              - if enc_name == :random
+                %li Random Encounter
+              - else
+                = render :partial => 'encounter_as_text', :locals => {:filename => Rails.root.join('content', 'encounters', title_to_filename(adv.title), enc_name + '.yml')}
+      %aside.span6.columns
+        .inner
+          :markdown
+            An Adventure is made up of several sequential **Encounters**. You choose the number of Encounters for your Adventure - there's no hard-and-fast rule, but low-XP Adventures should have fewer Encounters than high-XP ones. Let's start out trying roughly 5-6 Encounters at the Low end, ramping up to 10-12 at the High end. I'll tweak if necessary.
+			
+            Each Encounter should either be defined as "Random", in which case a [Random Encounter](#{example_encounter_path}) of appropriate level will be picked afresh each time the Adventure is run; or given a full fixed [Encounter](#{example_encounter_path}). The success or failure of the final **Encounter** governs whether the Adventure as a whole was a success or failure.
+            
+            Note that resolutions on fixed Encounters can involve substituting later fixed Encounters; substitutes should be defined as **Auxiliary Encounters**.
+    %br/      
+            
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Auxiliary Encounters:
+        .yamlCont
+          %ul
+            - adv.aux_encounters.each do |enc_name|
+              - if enc_name == :random
+                %li Random Encounter
+              - else
+                = render :partial => 'encounter_as_text', :locals => {:filename => Rails.root.join('content', 'encounters', title_to_filename(adv.title), enc_name + '.yml')}
+      %aside.span6.columns
+        .inner
+          :markdown
+            **Auxiliary Encounters** are Encounters which do not originally form part of the Adventure, but which can be swapped in (by name) depending on the result of an earlier fixed Encounter in the Adventure.

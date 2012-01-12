@@ -1,0 +1,5 @@
+= form_for @adventure, :url => '' do |f|
+  #encFields
+    - @adventure.encounters.each do |enc|
+      = f.fields_for "encounters[]", enc do |e|
+        .collapse_group{:"data-name" => "Encounter fields"}= render :partial => 'encounter_form', :locals => {:f => e, :no_author => true, :no_xp => true}

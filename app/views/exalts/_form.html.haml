@@ -1,0 +1,23 @@
+= form_for(@exalt) do |f|
+  = f.label :type, "Exalt type"
+  = f.select :type, %w<Solar>
+  
+  %br/
+  = f.label :name, "Name"
+  = f.text_field :name  
+  = f.select :gender, [['Male', 'm'], ['Female', 'f']]
+  
+  %fieldset.charSheetRegion
+    %legend Attributes
+    %table#attribute_table
+      %tr
+        %th Physical
+        %th Social
+        %th Mental
+      %tr.attribRow
+        %td.fiveDotField
+          = f.label :strength
+          = f.number_field :strength, :in => (1..5)
+  
+  .actions
+    = f.submit :class => 'btn'

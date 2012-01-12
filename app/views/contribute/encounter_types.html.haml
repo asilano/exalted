@@ -1,0 +1,26 @@
+%article.bodyText
+  %h1 Set Encounter types for Adventure '#{@adventure.title}'
+  %p Your Adventure looks like this when it's offered for selection:
+  = render :partial => 'exalted/adventure', :object => @adventure, :locals => {:options => {:demo => true}}
+  
+  .row
+    .span10
+      = form_tag :url => encounter_types_path do
+        
+        - (@adventure.num_encounters - 1).times do |ix|
+          = label_tag "enc_type_#{ix}", "Encounter #{ix + 1}"
+          .input= select_tag 'enc_type[]', options_for_select(["Fixed", "Random"], @adventure.encounter_names[ix].capitalize), :id => "enc_type_#{ix}"
+
+        = label_tag "enc_type_#{@adventure.num_encounters - 1}", "Encounter #{@adventure.num_encounters}"
+        .input= select_tag 'enc_type[]', options_for_select(["Fixed", "Random"], "Fixed"), :id => "enc_type_#{@adventure.num_encounters - 1}", :disabled => true
+        = hidden_field_tag 'enc_type[]', 'Fixed'
+        
+        = submit_tag 'Next - Define Fixed Encounters', :class => "btn offset2"
+  
+    .span6
+      %aside
+        .inner
+          :markdown
+            For each Encounter in this Adventure, choose whether it's **Fixed** (an Encounter that serves to advance the plot of the Adventure, and should always be the same) or **Random** (an Encounter chosen from the pool of Random Encounters). The last Encounter must be Fixed.
+            
+            You'll define the Fixed Encounters in the next step.

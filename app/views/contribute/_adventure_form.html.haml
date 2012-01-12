@@ -1,0 +1,116 @@
+- if @adventure.errors.any?
+  #errorExplanation
+    %h1
+      There were some problems with your submission
+    %p Sorry, but we couldn't accept your Adventure as-is. Please fix the following problems and try again.
+    %ul
+      - @adventure.errors.full_messages.each do |msg|
+        %li= msg
+    
+.row
+  .span10
+    = f.label :author
+    .input= f.text_field :author, :placeholder => "Your name"     
+  
+  .span6
+    %aside
+      .inner
+        What's your name...
+.row
+  .span10
+    = f.label :author_link
+    .input.input-prepend
+      = image_tag "url.png", :class => 'add-on'
+      = f.url_field :author_link, :class => 'xlarge', :placeholder => "Your web address"
+      
+  .span6
+    %aside
+      .inner          
+        #{'.'}..and where do you come from?
+          
+.row
+  .span10
+    = f.label :title
+    .input= f.text_field :title, :placeholder => "Name this adventure"
+    
+  .span6
+    %aside
+      .inner
+        Give a title for your Adventure. The player will see this when choosing what Adventure to head out on
+        
+.row
+  .span10
+    = f.label :summary
+    .input= f.text_area :summary, :cols => 50, :rows => 5, :placeholder => "Say what the Adventure is about"
+    
+  .span6
+    %aside
+      .inner
+        :markdown
+          Give the player a "hook" - an in-character reason to pick this Adventure. The summary should be just a couple of sentences at most.
+        
+          [Markdown][] is accepted. In particular, use \__italics_\_ and \*\***bold**\*\*.
+          
+            [Markdown]: http://daringfireball.net/projects/markdown/syntax
+     
+.numEncounters.row
+  .span10
+    = f.label :num_encounters
+    .input= f.number_field :num_encounters, :min => 1, :max => 15
+    
+  .span6
+    %aside
+      .inner
+        How many Encounters (random and fixed, but not auxiliary) make up this Encounter? You'll define them later.
+        
+.numEncounters.row
+  .span10
+    = f.label :num_aux_encounters
+    .input= f.number_field :num_aux_encounters, :min => 0, :max => 15
+    
+  .span6
+    %aside
+      .inner
+        How many Auxiliary Encounters are needed by this Encounter? You'll define them later.        
+        
+.row
+  .span10
+    = f.label :xp_bracket
+    .input= f.select :xp_bracket, XpBrackets.keys.map{|k| [k.to_s.titleize, k]}
+    
+  .span6
+    %aside
+      .inner
+        :markdown
+          What level of Exalts will be presented with this Adventure? 
+          
+          Note that the brackets aren't fixed yet, so I'm not telling you exactly what they are.
+          
+.row
+  .span10
+    = f.fields_for :image, @adventure.image do |imf|
+      = imf.label :file, 'Image link'
+      .input.input-prepend
+        = image_tag "url.png", :class => 'add-on'
+        = imf.url_field :file, :placeholder => "URI where image is available"
+      = imf.label :artist, 'Image artist'
+      .input= imf.text_field :artist, :placeholder => "Artist's preferred moniker"
+      =imf.label :artist_link
+      .input.input-prepend
+        = image_tag "url.png", :class => 'add-on'
+        = imf.url_field :artist_link, :placeholder => "Optional artist's homepage"
+      = imf.label :licence, 'Image licence'
+      .input= imf.text_field :licence, :placeholder => "CC-BY-NC-SA or more permissive"
+      
+  %aside.span6
+    .inner
+      :markdown
+        Details of an optional image which will adorn the Adventure.
+        
+        The **Image Link** doesn't need to be a direct link to the image; a page link where the image is obvious is fine.
+        
+        If an Image is supplied, **Image Artist** and **Image Licence** are required. **Image Licence** should be one of:
+        
+        * **Exalted Mini** for the modified CC-BY-NC-SA described on the #{link_to 'contribution landing page', contribute_path}
+        * A valid **Creative Commons code**, at least as permissive as CC-BY-NC-SA, and preferably CC-BY-SA
+        * A **link** to a page giving the artist's own licence terms.          

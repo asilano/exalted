@@ -1,0 +1,19 @@
+New Adventure '<%= @adventure.title %>' contributed by <%= @adventure.author %>
+
+YAML follows.
+
+<%= @adventure.to_yaml %>
+
+Encounters are as follows:
+<% @adventure.encounters.each do |title, enc| %>
+<%= title %>:
+<%= enc.to_yaml %>
+
+<% end %>
+
+Auxiliary Encounters are as follows:
+<% @adventure.aux_encounters.each do |title, enc| %>
+<%= title %>:
+<%= enc.to_yaml %>
+
+<% end %>

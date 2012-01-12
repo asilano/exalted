@@ -1,0 +1,37 @@
+--- !ruby/object:EncounterFile 
+adventure: :random
+author: Chris Howlett
+author_link:
+  :controller: exalted
+  :action: root
+  :only_path: false
+notes: Replaces Entry Ward if Investigate succeeded.
+text: |-
+  You reach the Spirit's grove, but your way is checked when you detect a crude series of Essence-wards hastily and incompletely erected, no doubt, in anticipation of your arrival. Before you can confront the recalcitrant being, you must pass through them.
+resolutions: 
+- !ruby/object:EncounterFile::Resolution
+  text: Try to deactivate the wards
+  test: Int + Occ vs. 3
+  success: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: A few moments' study reveals the nature of these wards, and you are able to apply a few subtle pushes of Essence to render them harmless.
+    effect: Nothing
+  failure: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: You tentatively channel a little Essence to disrupt the wards, and your caution proves valuable; a miscalculation causes a brief backlash as the wards disintegrate.
+    effect: -1L
+  botch: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: Confident you know how to disrupt the wards, you channel some Essence into them. Sadly, your confidence was misplaced, and you suffer a violent backlash. At least the wards went too.
+    effect: -1A
+- !ruby/object:EncounterFile::Resolution
+  text: Push through the wards
+  test: Sta + Res vs. 3
+  success: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: Bravely, you push hard against the wards. Essence arcs off your skin, but you shrug off the effects and enter the grove.
+    effect: Nothing
+  failure: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: Bravely, you push hard against the wards. Essence arcs off your skin, causing minor burns as you enter the grove.
+    effect: -1L
+image: !ruby/object:Image
+  file: shale.jpg
+  artist: Bioware
+  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
+  licence: Copyright

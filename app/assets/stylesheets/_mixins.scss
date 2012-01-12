@@ -1,0 +1,54 @@
+$toplevelH1Size: 30px;
+
+@function golden-ratio($value, $increment) {
+  @if $increment > 0 {
+    @for $i from 1 through $increment {
+      $value: ($value * 1.618);
+    }
+  }
+  @if $increment < 0 {
+    $increment: abs($increment);
+    @for $i from 1 through $increment {
+      $value: ($value / 1.618);
+    }
+  }
+  @if $increment == 0 {
+    @warn "Increment value cannot be zero; must be ...-3, -2, -1, 1, 2, 3...";
+  }
+  @return $value;
+}
+
+@mixin rounded-corners($radius)
+{
+  -webkit-border-radius: $radius; /* Saf3-4, iOS 1-3.2, Android <1.6 */
+     -moz-border-radius: $radius; /* FF1-3.6 */
+          border-radius: $radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+}
+
+@mixin rounded-tl($radius)
+{
+  -webkit-border-top-left-radius: $radius; /* Saf3-4, iOS 1-3.2, Android <1.6 */
+     -moz-border-top-left-radius: $radius; /* FF1-3.6 */
+          border-top-left-radius: $radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+}
+
+@mixin rounded-tr($radius)
+{
+  -webkit-border-top-right-radius: $radius; /* Saf3-4, iOS 1-3.2, Android <1.6 */
+     -moz-border-top-right-radius: $radius; /* FF1-3.6 */
+          border-top-right-radius: $radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+}
+
+@mixin rounded-bl($radius)
+{
+  -webkit-border-bottom-left-radius: $radius; /* Saf3-4, iOS 1-3.2, Android <1.6 */
+     -moz-border-bottom-left-radius: $radius; /* FF1-3.6 */
+          border-bottom-left-radius: $radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+}
+
+@mixin rounded-br($radius)
+{
+  -webkit-border-bottom-right-radius: $radius; /* Saf3-4, iOS 1-3.2, Android <1.6 */
+     -moz-border-bottom-right-radius: $radius; /* FF1-3.6 */
+          border-bottom-right-radius: $radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+}

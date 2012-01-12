@@ -1,0 +1,137 @@
+%article.bodyText
+  %h1 Examples
+  %section
+    %h1 Random Encounter
+    %p= link_to('(Example Adventure)', example_adventure_path)
+    
+    %p Below is a sample Random Encounter. First it's presented raw, as you would submit it in the #{link_to 'encounter contribution form', contribute_path}; below that, it's rendered as you would see it in play.
+    
+    - enc = YAML.load(Rails.root.join('content', 'encounters', 'random', 'stone_guardian.yml'))
+    %h1 Raw
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Author:
+        .yamlCont= enc.author
+        
+        %p.yamlHeader Author Link:
+        .yamlCont= url_for(enc.author_link)
+    
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            Your name in lights!
+            
+            Please fill in the name you'd like to license your Encounter under, together with a representative URI for you, if you so desire.
+    
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Title:
+        .yamlCont Stone Guardian        
+        
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            The Encounter's **Title** is not displayed anywhere; it simply serves to provide an internal identifier and filename.
+    
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Text:
+        .yamlCont!= enc.text.gsub(/\n/, '<br/>')
+        
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **Text** is the scene description that will be shown to the player when their Exalt comes across your encounter. It should be short and describe the challenge they face.
+            
+            [Markdown](http://daringfireball.net/projects/markdown/syntax) is accepted - the "\_Halt!\_" in the example will render as _italics_.
+
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Resolutions:
+        .yamlCont
+          - enc.resolutions.each_with_index do |res, ix|
+            - unless ix == 0
+              %hr/
+            :markdown
+              * Text: #{res.text}
+              * Test: #{res.test}
+              * Success: 
+                  * Text: #{res.success.text}
+                  * Effect: #{res.success.effect}
+              * Failure:
+                  * Text: #{res.failure.text}
+                  * Effect: #{res.failure.effect}
+              
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **Resolutions** are the various ways a player can choose to have their Exalt try to prevail in this Encounter.
+            
+            Each resolution should have:
+            
+            * **Text**, which will be presented to the player as the choice they can make 
+            * **Test**, which is the dice roll carried out behind the scenes. The player doesn't see this _(at least before the roll - I'm undecided whether the full result of the check should be shown, or a simple Succeed / Fail, or somewhere in between)_
+            * **Success**, which describes the **Text** to be displayed and the **Effect** if the Exalt beats the **Test**
+            * **Failure**, which describes the **Text** to be displayed and the **Effect** if the Exalt fails the **Test**
+            * **Botch**, which describes the **Text** to be displayed and the **Effect** if the Exalt botches the **Test**. Optional - a botch counts as a Failure by default.
+            
+            XP will be awarded automatically (probably at a rate of 0 per failure and 1 per success; +1 for an Adventure encounter). Note that all four fields are freeform, so you can leave them blank, part-filled or with notes to me (like "Test: Per&nbsp;+&nbsp;Awa quite hard", or "Failure: Not sure - injury or something else?") if you wish. Despite its inclusion in this example, "treasure" may well not be supported in this release...
+            
+    %br/
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader XP Level:
+        .yamlCont= enc.xp_bracket.to_s.titleize
+        
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **XP Level** describes the rough level of character which can be confronted with this **Encounter**. I'm deliberately leaving the definition of "low level", "high level" etc. vague, as I haven't finalised XP awards. Also, note that I may reassign a given Encounter to a different level if needed for balance or variety.
+    
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Image:
+        .yamlCont
+          :markdown
+            Link: #{enc.image.file ? "http://www.example.com/#{enc.image.file}" : 'None'}
+            
+            Artist: #{enc.image.artist || 'None'}
+            
+            Artist link: #{enc.image.artist_link || 'None'}
+            
+            Licence: #{enc.image.licence || 'None'}
+      
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **Image** is the details of a small _(how small?)_ image which will adorn the Encounter. Please supply a link from where I can download the image (later versions of this form will probably allow upload of image files, once I work out appropriate incantations).
+            
+            For copyright reasons, I will need you to supply the artist's name or handle &mdash; the moniker they gave themselves when self-attributing the work. A URI to their work or homepage would be polite. 
+            
+            Finally, I need to know the licence under which the image is released. If you are the artist, or you can consult them, you can specify the "Exalted Mini Adventures" licence, which is the general licence for this site, as described on the #{link_to 'contribution', contribute_path} landing page: Creative Commons BY-NC-SA modified to permit donations. Otherwise, I need the licence to be at least as permissive as a Creative Commons BY-NC-SA; in the case of a CC-NC, I will remove the image (pending artist permission) should the site move to a donation model. Creative Commons abbreviations, "Public Domain" and URIs of the artist's licence terms are acceptable.
+            
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Notes:
+        .yamlCont!= enc.notes.gsub(/\n/, '<br/>')
+        
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **Notes** is a chance for you to send a freeform messages to me about this encounter. These can be literally anything, from aspects you want to flag as needing balancing, to notes on features you don't think I've implemented but you think would be useful.
+            
+            In this example, I've noted that perhaps a third way of tackling the Encounter would be good; but you could just as easily write "wants to be pitched at high-level characters", or even "only makes sense in an Indoor setting, if you can differentiate those".
+                      
+    %h1 Rendered
+    = render :partial => 'exalted/encounter', :object => enc

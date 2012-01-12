@@ -1,0 +1,49 @@
+- resolution = f.object
+- if resolution.errors.any?
+  #errorExplanation
+    %h1
+      There were some problems with your submission
+    %p Sorry, but we couldn't accept your Resolution as-is. Please fix the following problems and try again.
+    %ul
+      - resolution.errors.full_messages.each do |msg|
+        %li= msg
+
+.row
+  .span10
+    = f.label :text
+    .input= f.text_field :text, :placeholder => "Description for choosing"
+    = f.label :test
+    .input= f.text_field :test, :placeholder => "Ex: Str + Mel/MA vs. 3"
+    %fieldset
+      %legend Success:
+      = f.fields_for 'success', resolution.success do |sf|
+        = sf.label :text
+        .input= sf.text_area :text, :cols => 30, :rows => 3, :placeholder => "Description when succeeded"
+        = sf.label :effect
+        .input= sf.text_field :effect, :placeholder => "Reward or penalty for success"
+    %fieldset
+      %legend Failure:
+      = f.fields_for 'failure', resolution.failure do |ff|
+        = ff.label :text
+        .input= ff.text_area :text, :cols => 30, :rows => 3, :placeholder => "Description when failed"
+        = ff.label :effect
+        .input= ff.text_field :effect, :placeholder => "Reward or penalty for failure"
+    %fieldset
+      %legend Botch:        
+      = f.fields_for 'botch', resolution.botch do |bf|
+        = bf.label :text
+        .input= bf.text_area :text, :cols => 30, :rows => 3, :placeholder => "Description when botched"
+        = bf.label :effect
+        .input= bf.text_field :effect, :placeholder => "Reward or penalty for botch"
+      
+  .span6
+    %aside
+      .inner
+        :markdown
+          Details of how the player might tackle this Encounter.
+          
+          * **Text** is the description of the action the player can choose
+          * **Test** is the roll and difficulty the player must succeed at. Note that, at this stage, only a simply roll of some combination of Attributes and Abilities against a given difficulty is accepted - in future, I intend to support extended rolls, extended contests and even combat; support for Charm use is also expected at some point.
+          * **Success** and **Failure** describe what's shown and what happens to the Exalt when they pass and fail the test.
+          * **Botch** optionally describes what's shown and what happens if the Exalt botches. If absent, the encounter uses the Failure case instead.
+      

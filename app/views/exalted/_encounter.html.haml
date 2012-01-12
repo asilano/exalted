@@ -1,0 +1,25 @@
+- options ||= {}
+%div{:class => "encounter#{' fixed_enc' if encounter.adventure != :random}"}
+  .attrib (by #{link_to encounter.author, url_for(encounter.author_link)})
+  - if encounter.image.file
+    %figure.flavour
+      - unless options[:demo]
+        = image_tag encounter.image.file
+      - else
+        = image_tag 'placeholder.png'
+      %figcaption #{image_tag('artist.png')} #{artist_link(encounter.image)}
+  
+  .words
+    .encounterText
+      :markdown
+        #{encounter.text}
+        
+    .encounterRes
+      What do you do?
+      = form_tag do
+        - encounter.resolutions.each_with_index do |res, ix|
+          = radio_button_tag 'resolution', ix
+          = label_tag "resolution_#{ix}", res.text
+          %br/
+        
+        = submit_tag 'Do It!', {:class => 'btn', :disabled => options[:demo]}

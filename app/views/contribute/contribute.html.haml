@@ -1,0 +1,38 @@
+%article.bodyText
+  %h1 Contribute Content
+  .row
+    %section.span10.columns
+      
+      :markdown
+        The site's still a long way from launch, but that doesn't means you're not welcome here! On the contrary, Exalted Mini Adventures needs your help!
+        
+        "What do you need help doing?", you ask. Well, when Exalted Mini Adventures launches, it'll need a selection of Mini Adventures for your Exalts to go off and enjoy. While I can supply some myself, I am only one person - and not a hugely creative one at that. Left to me, your characters would be reduced to escaping the Wild Hunt every day, with only occasional breaks to delve repeatedly into one set of ancient ruins.
+        
+        That's where you come in. Write some adventures - or even just some random encounters - for everyone's Exalts to experience, and chances are you'll see them up on this site when it finally gets properly underway.
+        
+        The sidebar to the right explains the difference between an Adventure and an Encounter. When you've decided which you'd like to contribute, click one of the buttons below to proceed
+       
+      .actions
+        = link_to 'Adventure!', new_adventure_path, :class => 'btn'
+        = link_to 'Random Encounter!', new_encounter_path, :class => 'btn'
+          
+      %p.legal Boring legal stuff: You're writing original works for me, which means that the thorny issue of Copyright rears its head. Never fear; I have great respect for your time and effort and would never seek to exploit anything you've produced in good faith. I promise that your work will always be identified as belonging to you, and will not be used by me to make money (except in the unlikely circumstance that Exalted Mini Adventures becomes popular enough that I need to recoup hosting costs). I may edit your contribution to fit "house style", for formatting reasons, or for balance concerns.
+      
+      %p.legal 
+        :markdown
+          Technically, by submitting a contribution to this site, you are agreeing to place that work under a [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 unported license](http://creativecommons.org/licenses/by-nc-sa/3.0/), with the following modification: "The restriction detailed in section 4.c. of the License shall not prevent Christopher Howlett or any other person associated with Exalted Mini Adventures from taking reasonable steps to recoup operational costs of administering Exalted Mini Adventures (for instance, by requesting donations to cover website hosting fees) using the Licensor's Work as part of Exalted Mini Adventures."
+        
+    %aside.span6.columns
+      .inner
+        %h1 Adventure or Encounter?
+        
+        :markdown
+          Adventures and Encounters are the things your Exalted character will go out doing. So what's the difference? 
+          
+          An **Encounter** is a single event; an obstacle your character must overcome. Perhaps a stone guardian bars your way and you must defeat it, trick it, or sneak around it. Perhaps a trap opens up in front of you and you must try to avoid falling in. Maybe a fiendish puzzle is set into the wall of a 1st Age tomb and your character must see if they have the brains to solve it. All these would be **Encounters**. You don't go out looking for **Encounters**, they just happen to you as part of **Adventures**.
+          
+          An **Adventure** is a series of **Encounters** with some over-arching plot. You can send your Exalt on an **Adventure** of your choice. Perhaps you set out to answer a call to help rid a village of a malevolent spirit. It takes some time to get there, so you meet two random **Encounter**s on the way. Once in the village, you **Encounter** traces of the spirit to investigate; these direct you to it. Again you have a random **Encounter** on the way, before reaching the spirit's protective wards and finally the spirit itself. Thus this adventure would consist of six **Encounters** - three scripted and three random.
+          
+          To recap - you choose to go on an **Adventure**. When doing so, you'll tackle a number of scripted **Encounters** and a number of random **Encounters**. I'd like you to contribute **Adventures** (complete with their scripted **Encounters**) or random **Encounters**.
+          
+          Care to see some examples? Sure: #{link_to 'Encounter', example_encounter_path} or #{link_to 'Adventure', example_adventure_path}?

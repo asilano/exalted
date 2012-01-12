@@ -1,0 +1,39 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activemodel:
+    attributes:
+      encounter_file:
+        num_resolutions: Number of Resolutions
+        xp_bracket: XP Bracket
+      encounter_file/resolution:
+        success_text: Success - Text
+        success_effect: Success - Effect
+        failure_text: Failure - Text
+        failure_effect: Failure - Effect 
+      adventure_file:
+        num_encounters: Number of Encounters
+        num_aux_encounters: Number of Auxiliary Encounters
+        xp_bracket: XP Bracket
+    errors:
+      models:
+        image:
+          attributes:
+            artist:
+              blank: can't be blank if an Image link is specified
+            licence:
+              blank: can't be blank if an Image link is specified
+        encounter_file/resolution:
+          attributes:
+            botch:
+              xor: must have both Text and Effect, or neither
+        encounter_file/resolution/outcome:
+          attributes:
+            effect:
+              blank: can't be blank; "None" is valid, though
+        
+  errors:
+    messages:
+      greater_than_or_equal_to: must be at least %{count}
+      less_than_or_equal_to: must be at most %{count}    

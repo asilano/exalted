@@ -1,0 +1,21 @@
+--- !ruby/object:AdventureFile
+title: The Haunted Village
+summary: |-
+  You've received a message from a village a few days' travel away. They seem to be having some trouble with a malevolent spirit.
+
+  Journey there, and put the spirit back in its place.
+author: Chris Howlett
+author_link:
+  :controller: exalted
+  :action: root
+  :only_path: false
+encounters:
+- :random
+- :random
+- investigate
+- :random
+- entry_ward
+- fight_spirit
+aux_encounters:
+- interrupted_ward
+xp_bracket: :low

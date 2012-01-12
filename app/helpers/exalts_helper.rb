@@ -1,0 +1,2 @@
+module ExaltsHelper
+end

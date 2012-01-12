@@ -1,0 +1,21 @@
+<h1>Listing exalts</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @exalts.each do |exalt| %>
+  <tr>
+    <td><%= link_to 'Show', exalt %></td>
+    <td><%= link_to 'Edit', edit_exalt_path(exalt) %></td>
+    <td><%= link_to 'Destroy', exalt, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Exalt', new_exalt_path %>

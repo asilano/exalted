@@ -1,0 +1,26 @@
+--- !ruby/object:EncounterFile 
+adventure: the_haunted_village
+author: Chris Howlett
+author_link:
+  :controller: exalted
+  :action: root
+  :only_path: false
+text: |-
+  Arriving in the village, you find that the spirit is not there. It seems it sensed your approach and has gone to earth. But where?
+  
+  You proceed to question the villagers and examine the area for any hint of where the spirit may be hiding.
+resolutions: 
+- !ruby/object:EncounterFile::Resolution
+  text: Search for clues
+  test: Int + Inv vs 2
+  success: !ruby/object:EncounterFile::Resolution::Outcome 
+    text: You sift through the evidence and quickly identify a small wooded grove a few miles north where the spirit is likely to be hiding. With luck, you can catch it there before it has a chance to prepare!
+    effect: Replace entry_ward with interrupted_ward
+  failure: !ruby/object:EncounterFile::Resolution::Outcome
+    text: It takes you the best part of a frustrating day before you work out where the spirit must be - in a small wooded grove a few miles north. Wearily, you head off that way.
+    effect: Nothing
+image: !ruby/object:Image
+  file: shale.jpg
+  artist: Bioware
+  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
+  licence: Copyright

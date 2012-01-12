@@ -1,0 +1,19 @@
+- options ||= {}
+.adventure
+  .title= adventure.title
+  .attrib (by #{link_to adventure.author, url_for(adventure.author_link)})
+  
+  - if adventure.image.file
+    %figure.flavour
+      - unless options[:demo]
+        = image_tag adventure.image.file
+      - else
+        = image_tag 'placeholder.png'
+      %figcaption #{image_tag('artist.png')} #{artist_link(adventure.image)}
+  
+  .words
+    .adventureSummary
+      :markdown
+        #{adventure.summary}
+        
+    = button_to 'Start Adventure', adventure_path(adventure.title.parameterize), {:class => 'btn', :disabled => options[:demo]}

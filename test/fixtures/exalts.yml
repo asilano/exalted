@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  type: 
+  name: MyString
+  active: false
+  total_xp: 1
+  unspent_xp: 1
+  caste: MyString
+  strength: 1
+  archery: 1
+  favoured: MyString
+
+two:
+  user_id: 1
+  type: 
+  name: MyString
+  active: false
+  total_xp: 1
+  unspent_xp: 1
+  caste: MyString
+  strength: 1
+  archery: 1
+  favoured: MyString

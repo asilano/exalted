@@ -1,0 +1,85 @@
+!!!
+%html
+  %head
+    %title Exalted
+    %link(rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css")/
+    %link(rel="shortcut icon" href="/favicon.ico?v=3")/
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = javascript_include_tag "https://raw.github.com/LeaVerou/prefixfree/master/prefixfree.min.js"
+    = csrf_meta_tags
+  
+    :javascript
+      (function( $ ) {        
+        $.fn.collapser = function() {
+          return this.each (function() {
+            jEl = $(this);
+            jEl.wrap('<div class="group"/>');
+            var cont = jEl.attr('data-name');
+            
+            var div = $('<div class="collapser"/>')
+              .html(cont)
+              .prependTo(jEl.parent())
+              .wrap('<div class="row"/>')
+              .wrap('<div class="span10"/>')
+              
+            $('<span class="closer"/>')
+              .prependTo(div)
+              .click(function() {
+                $(this)
+                  .toggleClass('opener closer')
+                  .closest('.group').find('.collapse_group').animate({height: 'toggle'}); 
+                });
+                
+            jEl.attr('data-collapser-done', 'true');
+          })
+        };
+        
+        $.fn.remover = function() {
+          return this.each (function() {          
+            var remButton = $('<button class="btn danger remover"/>').html('Remove ' + $(this).attr('data-name'));
+            remButton
+              .prependTo($(this))
+              .wrap('<div class="row"/>').wrap('<div class="span10"/>')
+              .click( function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).closest('.group')
+                  .animate(
+                    {height: 0}, 
+                    {complete: function() 
+                      {$(this).remove()}
+                    }
+                  )
+              })
+          })
+        };
+      })(jQuery)
+  %body
+
+  .container
+    %header#topBar
+      %h1= link_to 'Exalted Mini Adventures', root_path
+      
+      %aside#accountBar
+        Pre-Deployment - 
+        = link_to 'Contribue Content', contribute_path
+        - if false
+          - if current_user
+            Welcome, #{current_user.email}
+            %nav
+              %ul
+                %li= link_to "Settings", edit_user_registration_path
+                %li= link_to "Log Out", destroy_user_session_path, :method => :delete            
+          - else
+            Welcome, Guest.
+            %nav
+              %ul
+                %li= link_to "Log In", new_user_session_path
+                %li= link_to "Sign Up", new_user_registration_path            
+
+    - flash.each do |key, val|
+      .row
+        .flash.span10{:class => key}= val
+    
+    = yield

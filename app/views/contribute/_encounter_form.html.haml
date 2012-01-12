@@ -1,0 +1,126 @@
+- encounter = f.object
+- no_author ||= false
+- no_xp ||= false
+= f.hidden_field :adventure
+- if encounter.errors.any?
+  #errorExplanation
+    %h1
+      There were some problems with your submission
+    %p Sorry, but we couldn't accept your Encounter as-is. Please fix the following problems and try again.
+    %ul
+      - encounter.errors.full_messages.each do |msg|
+        %li= msg
+    
+- if no_author
+  = f.hidden_field :author
+  = f.hidden_field :author_link
+- else
+  .row
+    .span10
+      = f.label :author
+      .input= f.text_field :author, :placeholder => "Your name"     
+    
+    .span6
+      %aside
+        .inner
+          What's your name...
+  .row
+    .span10
+      = f.label :author_link
+      .input.input-prepend
+        = image_tag "url.png", :class => 'add-on'
+        = f.url_field :author_link, :class => 'xlarge', :placeholder => "Your web address"
+        
+    .span6
+      %aside
+        .inner          
+          #{'.'}..and where do you come from?
+          
+.row
+  .span10
+    = f.label :title
+    .input= f.text_field :title, :placeholder => "Name this encounter"
+    
+  .span6
+    %aside
+      .inner
+        Give a title for your Encounter. This will never be player-visible, and will only be used to generate a filename
+          
+.row
+  .span10
+    = f.label :text
+    .input= f.text_area :text, :cols => 50, :rows => 10, :placeholder => "Tell the player the obstacle they face"
+    
+  .span6
+    %aside
+      .inner
+        :markdown
+          What challenge is presented by this encounter?
+        
+          [Markdown][] is accepted. In particular, use \__italics_\_ and \*\***bold**\*\*.
+          
+            [Markdown]: http://daringfireball.net/projects/markdown/syntax
+     
+.numResolutions.row
+  .span10
+    = f.label :num_resolutions
+    .input= f.number_field :num_resolutions, :min => 1, :max => 5
+    
+  .span6
+    %aside
+      .inner
+        How many different ways should the player be given to tackle this Encounter? You'll define them later.
+    
+-if no_xp
+  = f.hidden_field :xp_bracket
+- else
+  .row
+    .span10
+      = f.label :xp_bracket
+      .input= f.select :xp_bracket, XpBrackets.keys.map{|k| [k.to_s.titleize, k]}
+      
+    .span6
+      %aside
+        .inner
+          :markdown
+            What level of Exalts will be presented with this Encounter? 
+            
+            Note that the brackets aren't fixed yet, so I'm not telling you exactly what they are.   
+
+.row
+  .span10
+    = f.fields_for :image, encounter.image do |imf|
+      = imf.label :file, 'Image link'
+      .input.input-prepend
+        = image_tag "url.png", :class => 'add-on'
+        = imf.url_field :file, :placeholder => "URI where image is available"
+      = imf.label :artist, 'Image artist'
+      .input= imf.text_field :artist, :placeholder => "Artist's preferred moniker"
+      =imf.label :artist_link
+      .input.input-prepend
+        = image_tag "url.png", :class => 'add-on'
+        = imf.url_field :artist_link, :placeholder => "Optional artist's homepage"
+      = imf.label :licence, 'Image licence'
+      .input= imf.text_field :licence, :placeholder => "CC-BY-NC-SA or more permissive"
+      
+  %aside.span6
+    .inner
+      :markdown
+        Details of an optional image which will adorn the encounter.
+        
+        The **Image Link** doesn't need to be a direct link to the image; a page link where the image is obvious is fine.
+        
+        If an Image is supplied, **Image Artist** and **Image Licence** are required. **Image Licence** should be one of:
+        
+        * **Exalted Mini** for the modified CC-BY-NC-SA described on the #{link_to 'contribution landing page', contribute_path}
+        * A valid **Creative Commons code**, at least as permissive as CC-BY-NC-SA, and preferably CC-BY-SA
+        * A **link** to a page giving the artist's own licence terms.
+    
+.row
+  .span10
+    = f.label :notes
+    .input= f.text_area :notes, :cols => 50, :rows => 2, :placeholder => "Tell me anything you like"
+    
+  %aside.span6
+    .inner
+      Anything you want to note for my benefit. Feel free to note features you think I may not have implemented if they would help your Encounter - I might just decide to include them.    

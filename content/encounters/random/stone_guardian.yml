@@ -1,0 +1,37 @@
+--- !ruby/object:EncounterFile 
+adventure: :random
+author: Chris Howlett
+author_link:
+  :controller: exalted
+  :action: root
+  :only_path: false
+notes: May want third choice?
+resolutions: 
+- !ruby/object:EncounterFile::Resolution
+  text: Attack!
+  test: Str + Mel/MA vs. 3
+  success: !ruby/object:EncounterFile::Resolution::Outcome
+    text: The golem is a tough opponent, and manages to land a blow on you before you can fell it. On the plus side, you are able to take one of its former possessions for yourself.
+    effect: -1L, treasure
+  failure: !ruby/object:EncounterFile::Resolution::Outcome
+    text: Try as you might, you just cannot bring the golem down. After suffering a blow to the head, you decide to make a run for it. Thankfully, the guardian declines to follow.
+    effect: -1L
+- !ruby/object:EncounterFile::Resolution
+  text: Try to sneak past
+  test: Dex + Ste vs. 5
+  success: !ruby/object:EncounterFile::Resolution::Outcome
+    text: Staying as quiet as a mouse and finding what cover you can, you manage to sneak past the guardian without being spotted.
+    effect: Nothing
+  failure: !ruby/object:EncounterFile::Resolution::Outcome
+    text: Just when you thought you were past, you stumble and alert the guardian to your presence. The pain from blow you suffer before you scramble away reinforces the strength of stone.
+    effect: -2L
+text: |-
+  "_HALT!_" you hear. The voice can only come from a massive stone guardian which blocks your path.
+  
+  Relic of some long-dead Essence-wielder, it stands there impassively; yet you have no doubt it is ready to attack any who try to pass it.
+image: !ruby/object:Image
+  file: shale.jpg
+  artist: Bioware
+  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
+  licence: Copyright
+xp_bracket: :low

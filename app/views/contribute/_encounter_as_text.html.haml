@@ -1,0 +1,54 @@
+- enc = YAML.load_file(filename)
+%li
+  :markdown
+    **#{filename.basename('.*').to_s.titleize}**                  
+  %dl.grouped
+    %dt Text
+    %dd
+      :markdown
+        #{enc.text.gsub(/\n/, '<br/>')}
+    %dt Resolutions
+    %dd
+      %ul
+        - enc.resolutions.each do |res|
+          %li
+            %dl
+              %dt Text
+              %dd #{res.text}
+              %dt Test
+              %dd #{res.test}
+              %dt Success
+              %dd
+                %dl
+                  %dt Text
+                  %dd #{res.success.text}
+                  %dt Effect
+                  %dd #{res.success.effect}
+              %dt Failure
+              %dd
+                %dl
+                  %dt Text
+                  %dd #{res.failure.text}
+                  %dt Effect
+                  %dd #{res.failure.effect}
+              - if res.botch
+                %dt Botch
+                %dd
+                  %dl
+                    %dt Text
+                    %dd #{res.botch.text}
+                    %dt Effect
+                    %dd #{res.botch.effect}
+    %dt Image
+    %dd
+      %dl
+        %dt File
+        %dd #{enc.image.file}
+        %dt Artist
+        %dd #{enc.image.artist}
+        %dt Artist Link
+        %dd #{url_for(enc.image.artist_link)}
+        %dt Licence
+        %dd #{enc.image.licence}
+    %dt Notes
+    %dd= enc.notes

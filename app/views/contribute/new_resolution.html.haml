@@ -1,0 +1,8 @@
+%article.bodyText
+  %h1 Add Resolution to Encounter '#{@encounter.title}'
+  %p So far, your Encounter looks like this:
+  = render :partial => 'exalted/encounter', :object => @encounter, :locals => {:options => {:demo => true}}
+  = form_for @resolution, :url => new_resolution_path do |f|
+    = render :partial => 'resolution_form', :locals => {:f => f}
+    .row
+      = f.submit 'Add Resolution', :class => "btn offset2"

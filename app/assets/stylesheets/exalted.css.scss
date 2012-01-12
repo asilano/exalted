@@ -1,0 +1,92 @@
+// Place all the styles related to the Exalted controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins";
+
+$pendEncBgCol: #ffb;
+$adventureBgCol: hsl(200, 90%, 80%);
+$failEncBgCol: #f00;
+$succEncBgCol: #0f0;
+
+.encounter
+{
+  background-color: $pendEncBgCol;
+  &.fixed_enc { background-color: $adventureBgCol; }
+  
+  border: 2px solid darken($pendEncBgCol, 50);
+  border-radius: 5px;
+  padding: 5px; 
+  margin-bottom: 18px;
+  
+  figure
+  {
+    vertical-align: top;
+    margin: 5px 10px 0 0;
+    display: inline-block;
+    > img
+    { max-width: 100px; max-height: 100px;}
+    
+    figcaption 
+    { text-align: center; }
+  }
+  
+  .words { display: inline-block; }
+  
+  .encounterRes
+  {
+    form { margin-bottom: 8px; }
+    label { float: none; }    
+    input[type='submit'] { margin-top: 5px; }
+  }
+}
+
+.adventure
+{
+  background-color: $adventureBgCol;
+  border: 2px solid darken($adventureBgCol, 50);
+  border-radius: 5px;
+  padding: 5px; 
+  margin-bottom: 18px;
+  color: black;
+  overflow: hidden;
+  
+  .title
+  {
+    font-size: golden-ratio($toplevelH1Size, -1);
+    font-style: italic;
+    margin: 0 0 2px 10px;
+  }
+  
+  .attrib
+  {
+    margin: 0 0 10px 10px;
+  }
+  
+  figure
+  {
+    position: relative;
+    vertical-align: top;
+    margin: 5px 10px 0 0;
+    float: left;
+    text-align: center;
+    
+    > img
+    { max-width: 100px; max-height: 100px;}
+    
+    figcaption 
+    {     
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100px;
+      
+      transition: max-width 0.5s ease-in;
+      
+      &:hover
+      {
+        max-width: 1500px;
+      }
+    }
+  }
+  
+  .words { display: inline-block; }
+}

@@ -1,0 +1,87 @@
+%article.bodyText
+  %h1 New Encounter
+  = form_for @encounter, :url => new_encounter_path do |f|
+    .collapse_group{:"data-name" => "Encounter fields"}= render :partial => 'encounter_form', :locals => {:f => f}
+    .row
+      #submitBtn= f.submit 'Next - Define Resolutions', :class => "btn offset2"
+      
+      
+  :javascript
+    $.previewXhr = 0;
+    // Grab the nested fields for any resolutions already on the encounter
+    $('<div/>')
+      .insertBefore($('#submitBtn').parent())
+      .load('#{res_fields_for_enc_path} #resFields', function(data){
+        $('#resFields')
+          .unwrap()
+          .replaceWith($('#resFields').html());
+          
+        updatePage();       
+    });     
+    
+    function updatePage()
+    {
+      // Wrap the sections of form in a collapser block
+      $('.collapse_group').collapser();
+    
+      // Remove, hide or relabel sections of the Encounter form that we no longer need
+      $('.numResolutions').hide();
+      $('#submitBtn input.btn')
+        .val("Submit Encounter")
+        .click(function() {
+          $('#new_encounter_file .numResolutions input').val($('.collapse_group[data-name="Resolution fields"]').length);
+        });
+      
+      // Any existing Resolution forms get a "Remove this Resolution" button
+      // Because of the collapser, each such can be found as having a .collapse_group[data_name="Resolution fields"], 
+      // and we wish to remove the parent .group
+      $('.collapse_group[data-name="Resolution fields"]').remover();
+        
+      // Create a button to add a new Resolution section
+      var addButton = $('<input type="button" class="btn success offset2 input" value="Add Resolution"/>');
+      var resFields;
+      $.get('#{new_res_fields_for_enc_path}', function(data) {
+        resFields = $(data).find('#resFields').html();
+        addButton
+          .insertBefore($('#submitBtn').parent())
+          .wrap('<div class="row"/>')
+          .click( function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(resFields)
+              .insertBefore($(this).closest('.row'))
+              .hide()
+              .collapser()
+              .remover()
+              .animate({height: 'toggle'});
+          })
+      });
+      
+      // Create a fixed footer to hold a preview
+      $('<div class="row"><div id="preview" class="span16"/></div>').appendTo($('.container'));     
+      encPreview();
+    };
+          
+    function encPreview() {            
+      $.ajax('#{encounter_preview_path}', {
+       type: 'post',
+        data: $('#new_encounter_file').serialize(),
+       
+        beforeSend: function(xhr) {
+          if ($.previewXhr != 0)
+            $.previewXhr.abort();
+            
+          $.previewXhr = xhr;  
+        },
+  
+        success: function(data, textStatus) {
+         $('#preview').html("Your encounter will look like this: " + data);
+          
+          // Pad the main form so the preview won't prevent the buttons being pressed.
+          $('.container').css({paddingBottom: $('#preview').height() + 18 + "px"});
+        }
+      })
+    };
+    
+    // When the user updates part of the form, generate a preview      
+    $('#new_encounter_file').delegate('input,textarea,select', 'blur', encPreview);
