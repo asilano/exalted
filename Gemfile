@@ -27,9 +27,8 @@ end
 
 gem 'jquery-rails'
 
-group :development, :test do
-  gem 'therubyracer'
-end
+gem 'therubyracer'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
