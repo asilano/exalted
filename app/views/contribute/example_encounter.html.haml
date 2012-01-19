@@ -4,7 +4,7 @@
     %h1 Random Encounter
     %p= link_to('(Example Adventure)', example_adventure_path)
     
-    %p Below is a sample Random Encounter. First it's presented raw, as you would submit it in the #{link_to 'encounter contribution form', contribute_path}; below that, it's rendered as you would see it in play.
+    %p Below is a sample Random Encounter. First it's presented raw, as you would submit it in the #{link_to 'encounter contribution form', new_encounter_path}; below that, it's rendered as you would see it in play.
     
     - enc = YAML.load(Rails.root.join('content', 'encounters', 'random', 'stone_guardian.yml'))
     %h1 Raw

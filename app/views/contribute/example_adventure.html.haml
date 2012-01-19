@@ -2,9 +2,9 @@
   %h1 Examples
   %section
     %h1 Adventure
-    %p= link_to 'Example Encounter', example_encounter_path
+    %p= link_to '(Example Encounter)', example_encounter_path
     
-    %p Below is a sample Adventure presented as you would submit it in the #{link_to 'adventure contribution form', contribute_path}.
+    %p Below is a sample Adventure presented as you would submit it in the #{link_to 'adventure contribution form', new_adventure_path}.
     
     - adv = YAML.load(Rails.root.join('content', 'adventures', 'the_haunted_village.yml'))
     
