@@ -49,12 +49,11 @@ Exalted::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => "gmail.com",
-    :user_name            => "chowlett09",
-    :password             => "d0rmouse",
-    :authentication       => "plain",
+    :address              => MAIL_SERV,  
+    :port                 => MAIL_PORT,  
+    :domain               => MAIL_DOM,  
+    :user_name            => MAIL_USER,  
+    :password             => MAIL_PASS,
     :enable_starttls_auto => true
   }
 
