@@ -86,3 +86,38 @@
         .inner
           :markdown
             **Auxiliary Encounters** are Encounters which do not originally form part of the Adventure, but which can be swapped in (by name) depending on the result of an earlier fixed Encounter in the Adventure.
+            
+    %br/
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader XP Level:
+        .yamlCont= adv.xp_bracket.to_s.titleize
+        
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **XP Level** describes the rough level of character which can choose this **Adventure**. I'm deliberately leaving the definition of "low level", "high level" etc. vague, as I haven't finalised XP awards. Also, note that I may reassign a given Adventure to a different level if needed for balance or variety.
+    
+    %br/
+    
+    .row.gapAbove
+      .span10.columns
+        %p.yamlHeader Image:
+        .yamlCont
+          :markdown
+            Link: #{adv.image.file || 'None'}
+            
+            Artist: #{adv.image.artist || 'None'}
+            
+            Artist link: #{adv.image.artist_link || 'None'}
+            
+            Licence: #{adv.image.licence || 'None'}
+      
+      %aside.span6.columns
+        .inner.againstHeader
+          :markdown
+            **Image** is the details of a small (at present, scaled to 100px x 100px) image which will adorn the Adventure. Please supply a link from where I can download the image (later versions of this form will probably allow upload of image files, once I work out appropriate incantations).
+            
+            For copyright reasons, I will need you to supply the artist's name or handle &mdash; the moniker they gave themselves when self-attributing the work. A URI to their work or homepage would be polite. 
+            
+            Finally, I would like to know the licence under which the image is released. If you are the artist, or you can consult them, you can specify the "Exalted Mini Adventures" licence, which is the general licence for this site, as described on the #{link_to 'contribution', contribute_path} landing page: Creative Commons BY-NC-SA modified to permit donations. Otherwise, it would help if the licence were at least as permissive as a Creative Commons BY-NC-SA; in the case of a CC-NC, I will remove the image (pending artist permission) should the site move to a donation model. Creative Commons abbreviations, "Public Domain" and URIs of the artist's licence terms are acceptable. Please enter "Unknown" if the licence isn't obtainable - I will probably use such images for as long as the site remains entirely unfunded.
