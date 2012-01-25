@@ -3,11 +3,11 @@
   %section
     %h1 Adventure
     %p= link_to '(Example Encounter)', example_encounter_path
-    
+
     %p Below is a sample Adventure presented as you would submit it in the #{link_to 'adventure contribution form', new_adventure_path}.
     
     - adv = YAML.load(Rails.root.join('content', 'adventures', 'the_haunted_village.yml'))
-    
+
     .row.gapAbove
       .span10.columns
         %p.yamlHeader Author:
@@ -116,7 +116,7 @@
       %aside.span6.columns
         .inner.againstHeader
           :markdown
-            **Image** is the details of a small (at present, scaled to 100px x 100px) image which will adorn the Adventure. Please supply a link from where I can download the image (later versions of this form will probably allow upload of image files, once I work out appropriate incantations).
+            **Image** is the details of a small (at present, scaled to 100px x 100px) image which will adorn the Adventure. Please supply a link from where I can download or hotlink the image (later versions of this form will probably allow upload of image files, once I work out appropriate incantations).
             
             For copyright reasons, I will need you to supply the artist's name or handle &mdash; the moniker they gave themselves when self-attributing the work. A URI to their work or homepage would be polite. 
             
