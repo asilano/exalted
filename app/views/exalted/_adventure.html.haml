@@ -16,4 +16,4 @@
       :markdown
         #{adventure.summary}
         
-    = button_to 'Start Adventure', adventure_path(adventure.title.parameterize), {:class => 'btn', :disabled => options[:demo]}
+    = button_to 'Start Adventure', adventure_path(adventure.title.try(:parameterize) || (options[:demo] && "Adventure")), {:class => 'btn', :disabled => options[:demo]}

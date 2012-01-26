@@ -183,7 +183,7 @@ class ContributeController < ApplicationController
   
   def adventure_preview
     @adventure = AdventureFile.new(params[:adventure_file])
-    #render :partial => "exalted/adventure", :layout => false, :object => @encounter, :locals => {:options => {:demo => true}}
+    render :partial => "exalted/adventure", :layout => false, :object => @adventure, :locals => {:options => {:demo => true}}
   end
 
 private
