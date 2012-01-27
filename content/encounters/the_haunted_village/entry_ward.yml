@@ -31,7 +31,7 @@ resolutions:
     text: Bravely, you push hard against the wards. Essence arcs off your skin, causing painful burns as you enter the grove.
     effect: -2L
 image: !ruby/object:Image
-  file: shale.jpg
-  artist: Bioware
-  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
-  licence: Copyright
+  file: 
+  artist: 
+  artist_link: 
+  licence: 

@@ -20,7 +20,7 @@ resolutions:
     text: It takes you the best part of a frustrating day before you work out where the spirit must be - in a small wooded grove a few miles north. Wearily, you head off that way.
     effect: Nothing
 image: !ruby/object:Image
-  file: shale.jpg
-  artist: Bioware
-  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
-  licence: Copyright
+  file: http://th05.deviantart.net/fs10/PRE/i/2006/122/c/0/Cobbles_by_kyrawaz.jpg
+  artist: kyrawaz
+  artist_link: http://kyrawaz.deviantart.com/  
+  licence: Unknown

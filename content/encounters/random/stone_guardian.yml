@@ -30,8 +30,8 @@ text: |-
   
   Relic of some long-dead Essence-wielder, it stands there impassively; yet you have no doubt it is ready to attack any who try to pass it.
 image: !ruby/object:Image
-  file: shale.jpg
-  artist: Bioware
-  artist_link: http://en.wikipedia.org/wiki/Dragon_Age_Origins  
-  licence: Copyright
+  file: http://fc08.deviantart.net/fs8/i/2005/351/9/e/Golem_by_Ribera.jpg
+  artist: Ribera
+  artist_link: http://ribera.deviantart.com  
+  licence: Unknown
 xp_bracket: :low
